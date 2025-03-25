@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\users\DashboardController;
+use SebastianBergmann\CodeCoverage\Report\Html\Dashboard;
 
 Route::redirect('/','posts')->name('posts');
 
@@ -16,8 +18,9 @@ Route::middleware('guest')->group(function(){
 });
 
 Route::middleware('auth')->group(function () {
-    Route::view('/dashboard', 'users.dashboard')->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class,'index'])->name('dashboard');
     Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('/posts/create', [PostController::class, 'create'])->name('posts.create');
+    Route::get('/posts/mine',[DashboardController::class,'myPosts'])->name('posts.mine');
 });
 
