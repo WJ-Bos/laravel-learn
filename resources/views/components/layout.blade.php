@@ -15,7 +15,7 @@
         <nav class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16 items-center">
                 <div class="flex-shrink-0 flex items-center">
-                    <a href="{{ route('home') }}"
+                    <a href="{{ route('posts') }}"
                         class="text-white text-xl font-bold hover:text-slate-200 transition duration-200">
                         Type Shi🔥
                     </a>
@@ -53,7 +53,7 @@
                                     <p class="text-xs text-gray-500 truncate">{{auth()->user()->email}}</p>
                                 </div>
 
-                                <a href="{{ route('home') }}"
+                                <a href="{{ route('posts') }}"
                                     class="block px-4 py-3 text-sm text-gray-700 hover:bg-gray-50 transition-colors duration-150">
                                     Home
                                 </a>
@@ -77,8 +77,10 @@
         </nav>
     </header>
 
-    <main class="py-8 px-4 mx-auto max-w-screen-lg">
-        {{ $slot }}
+    <main class="flex-1 overflow-hidden">
+        <div class="py-8 px-4 mx-auto max-w-screen-lg">
+            {{ $slot }}
+        </div>
     </main>
 </body>
 
