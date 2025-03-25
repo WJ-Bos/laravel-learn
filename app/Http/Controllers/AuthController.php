@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Redirect;
 
 class AuthController extends Controller
 {
+
     public function register(Request $request)
     {
         $fields = $request->validate([
@@ -21,7 +22,7 @@ class AuthController extends Controller
         $user = User::create($fields);
         Auth::login($user);
 
-        return redirect()->route('home');
+        return redirect()->route('posts');
     }
 
 
