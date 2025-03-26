@@ -12,13 +12,14 @@
                         <h1 class="text-3xl font-bold text-neutral-100">{{ auth()->user()->name }}</h1>
                         <p class="text-neutral-400">@ {{ auth()->user()->name }}</p>
                     </div>
-                    <button
+                    <a href="{{ route('profile.edit') }}"
                         class="mt-4 md:mt-0 bg-amber-300 text-black px-6 py-2 rounded-full transition duration-200 shadow-sm">
                         Edit Profile
-                    </button>
+                    </a>
                 </div>
 
-                <p class="mt-4 text-neutral-300">Digital creator | Photography enthusiast | Sharing moments that matter</p>
+                <p class="mt-4 text-neutral-300">Digital creator | Photography enthusiast | Sharing moments that matter
+                </p>
 
                 <div class="flex space-x-6 mt-4 text-neutral-100">
                     <div>
@@ -80,13 +81,12 @@
                                 <div
                                     class="p-4 border-b border-neutral-700 bg-gradient-to-r from-neutral-800 to-neutral-700">
                                     <div class="flex items-center gap-3">
-                                        <div
-                                            class="h-10 w-10 rounded-full bg-amber-300 p-0.5 overflow-hidden">
+                                        <div class="h-10 w-10 rounded-full bg-amber-300 p-0.5 overflow-hidden">
                                             <img src="https://i.pravatar.cc/150?img={{ $post->id % 70 }}" alt="User"
                                                 class="h-full w-full object-cover rounded-full border border-neutral-800">
                                         </div>
                                         <div class="flex-1">
-                                            <h4 class="font-bold text-neutral-100">username</h4>
+                                            <h4 class="font-bold text-neutral-100">{{ $post->user->name }}</h4>
                                             <p class="text-xs text-blue-400 font-medium">
                                                 {{ $post->created_at->diffForHumans() }}</p>
                                         </div>
@@ -103,8 +103,27 @@
                                 <!-- Post Content -->
                                 <div class="p-4">
                                     <div class="mb-3">
+                                        @php
+                                            $colorClasses = [
+                                                'bg-red-300',
+                                                'bg-blue-300',
+                                                'bg-green-300',
+                                                'bg-purple-300',
+                                                'bg-amber-300',
+                                                'bg-emerald-300',
+                                                'bg-yellow-300',
+                                            ];
+                                            $randomColor = $colorClasses[array_rand($colorClasses)];
+                                        @endphp
+
                                         <span
-                                            class="inline-block px-2 py-1 text-xs font-semibold bg-blue-900/50 text-blue-400 rounded-full">#Laravel</span>
+                                            class="inline-block px-2 py-1 text-xs font-semibold rounded-full text-black {{ $randomColor }}">
+                                            @if ($post->hashtag)
+                                                #{{ $post->hashtag }}
+                                            @else
+                                                #NoHashTag
+                                            @endif
+                                        </span>
                                     </div>
                                     <h3 class="text-lg font-bold text-neutral-100 mb-2">{{ $post->title }}</h3>
                                     <p class="text-neutral-300 mb-4">{{ Str::limit($post->body, 120) }}</p>
@@ -150,7 +169,8 @@
                                     </svg>
                                 </div>
                                 <h3 class="text-xl font-bold text-neutral-100 mb-2">No posts yet</h3>
-                                <p class="text-neutral-400 mb-4">Be the first to share your thoughts with the community!
+                                <p class="text-neutral-400 mb-4">Be the first to share your thoughts with the
+                                    community!
                                 </p>
                                 <a href="{{ route('posts.create') }}"
                                     class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-neutral-100 rounded-lg shadow-md font-medium transition">
@@ -203,7 +223,8 @@
                                 </svg>
                             </div>
                             <div>
-                                <p class="text-sm text-neutral-300"><span class="font-medium">Sarah Miller</span> liked
+                                <p class="text-sm text-neutral-300"><span class="font-medium">Sarah Miller</span>
+                                    liked
                                     your post</p>
                                 <p class="text-xs text-neutral-500 mt-1">15 minutes ago</p>
                             </div>
