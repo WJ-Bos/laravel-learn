@@ -1,140 +1,235 @@
 <x-layout>
     @auth
-        <div class="container mx-auto px-4 py-8">
-            <!-- Page Header (unchanged) -->
-            <div class="flex flex-col md:flex-row justify-between items-start md:items-center mb-8">
-                <div>
-                    <h1 class="text-3xl font-bold text-gray-800">Community Feed</h1>
-                    <p class="text-gray-600 mt-2">Latest thoughts from people you follow</p>
-                </div>
-                <div class="mt-4 md:mt-0">
-                    <a href="{{ route('posts.create') }}">
-                       <div class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-full transition duration-200 shadow-sm flex items-center">
-                        <svg class="h-5 w-5 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <div class="min-h-[calc(100vh-4rem)] ">
+            <!-- Vibrant Search Header -->
+            <div class=" py-6 px-4 border-b border-neutral-700">
+                <div class="relative max-w-2xl mx-auto">
+                    <input type="text" placeholder="Search posts, people, or tags..."
+                        class="w-full pl-12 pr-4 py-3 bg-neutral-800/80 backdrop-blur-sm rounded-full border border-neutral-700 focus:ring-2 focus:ring-blue-500 focus:border-transparent shadow-sm text-neutral-100 placeholder-neutral-400">
+                    <div class="absolute left-4 top-3.5 text-neutral-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                                d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
                         </svg>
-                        New Post
-                        </div>
-                    </a>
-                </div>
-
-            </div>
-            <!-- Mobile View (hidden on desktop) -->
-            <div class="block lg:hidden overflow-y-auto" style="height: calc(100vh - 180px)">
-
-                <div class="space-y-6 pb-6">
-                    <!-- Post Card 1 -->
-                    @foreach ($posts as $post)
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 overflow-hidden mr-4">
-                                    <img src="https://picsum.photos/200" alt="User"
-                                        class="h-full w-full object-cover">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <p class="font-medium text-gray-900">Username</p>
-                                            <p class="text-xs text-gray-500">{{$post->created_at->diffForHumans()}}</p>
-                                        </div>
-                                        <button class="text-gray-400 hover:text-gray-600">
-                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <h3 class="text-xl font-bold p-2 underline">{{$post->title}}</h3>
-                                    </div>
-                                    <div class="mt-3 text-gray-800">
-                                        <p>{{Str::words($post->body,40)}}</p>
-                                    </div>
-                                    <div class="mt-4 flex items-center space-x-4 text-gray-500 text-sm">
-                                        <!-- Like, Comment, Favorite buttons... -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-
-                </div>
-            </div>
-
-            <!-- Desktop View -->
-            <div class="hidden lg:grid lg:grid-cols-3 gap-6 h-[calc(100vh-180px)]">
-                <div class="lg:col-span-2 overflow-y-auto pr-2">
-                    <div class="space-y-6">
-                        @foreach ($posts as $post)
-                        <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                            <div class="flex items-start">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 overflow-hidden mr-4">
-                                    <img src="https://picsum.photos/200" alt="User"
-                                        class="h-full w-full object-cover">
-                                </div>
-                                <div class="flex-1">
-                                    <div class="flex items-center justify-between">
-                                        <div>
-                                            <h3 class="font-medium text-gray-900">Username</h3>
-                                            <p class="text-xs text-gray-500">{{$post->created_at->diffForHumans()}}</p>
-                                        </div>
-                                        <button class="text-gray-400 hover:text-gray-600">
-                                            <svg class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
-                                            </svg>
-                                        </button>
-                                    </div>
-                                    <div>
-                                        <h3 class="text-xl font-bold p-2 underline">{{$post->title}}</h3>
-                                    </div>
-                                    <div class="mt-3 text-gray-800">
-                                        <p>{{Str::words($post->body,40)}}</p>
-                                    </div>
-                                    <div class="mt-4 flex items-center space-x-4 text-gray-500 text-sm">
-                                        <!-- Like, Comment, Favorite buttons... -->
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        @endforeach
-
                     </div>
                 </div>
-                <!-- Sidebar (hidden on mobile) -->
-                <div class="hidden lg:block space-y-6 sticky top-28 h-fit">
-                    <!-- Who to Follow -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Who to Follow</h2>
-                        <div class="space-y-4">
-                            <div class="flex items-center">
-                                <div class="flex-shrink-0 h-10 w-10 rounded-full bg-gray-200 overflow-hidden mr-3">
-                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="User"
-                                        class="h-full w-full object-cover">
+            </div>
+
+            <!-- Main Content Grid -->
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-6">
+                <!-- Left Sidebar -->
+                <div class="lg:col-span-3 space-y-6">
+                    <!-- User Profile Card -->
+                    <div class="bg-neutral-800 rounded-xl shadow-sm p-5 border border-neutral-700 sticky top-32">
+                        <div class="flex items-center gap-4 mb-5">
+                            <div
+                                class="h-14 w-14 rounded-full bg-amber-300 p-0.5 overflow-hidden">
+                                <img src="https://i.pravatar.cc/150?img=5" alt="Profile"
+                                    class="h-full w-full object-cover rounded-full border-2 border-neutral-800">
+                            </div>
+                            <div>
+                                <h3 class="font-bold text-neutral-100 text-lg">{{ auth()->user()->name }}</h3>
+                                <p class="text-sm text-blue-400 font-medium">@ {{ auth()->user()->name }}</p>
+                            </div>
+                        </div>
+                        <a href="{{ route('posts.create') }}"
+                            class="w-full flex items-center justify-center gap-2 px-4 py-3 bg-amber-300 text-black rounded-xl shadow-md transition font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                            </svg>
+                            New Post
+                        </a>
+                        <a href="{{ route('dashboard') }}"
+                            class="w-full mt-3 flex items-center justify-center gap-2 px-4 py-2.5 border border-neutral-700 bg-neutral-800 hover:bg-neutral-700 text-neutral-100 rounded-xl transition font-medium">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                                stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                            </svg>
+                            Dashboard
+                        </a>
+                    </div>
+
+                    <!-- Trending Topics -->
+                    <div class="bg-neutral-800 rounded-xl shadow-sm p-5 border border-neutral-700 sticky top-[22rem]">
+                        <h3 class="font-bold text-lg text-neutral-100 mb-4 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-red-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
+                            </svg>
+                            Trending Today
+                        </h3>
+                        <div class="space-y-3">
+                            <a href="#" class="block p-3 hover:bg-neutral-700/50 rounded-xl transition">
+                                <div class="flex justify-between items-center">
+                                    <span class="font-bold text-blue-400">#LaravelTips</span>
+                                    <span class="text-xs bg-blue-900/50 text-blue-400 px-2 py-1 rounded-full">1.2K
+                                        posts</span>
                                 </div>
-                                <div class="flex-1 min-w-0">
-                                    <p class="text-sm font-medium text-gray-900 truncate">David Kim</p>
-                                    <p class="text-xs text-gray-500 truncate">Product Designer</p>
+                                <p class="text-sm text-neutral-400 mt-1">Latest tips and tricks for Laravel developers</p>
+                            </a>
+                            <!-- More trending topics... -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Feed - 2 Column Posts -->
+                <div class="lg:col-span-6">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+                        @forelse($posts as $post)
+                            <div
+                                class="bg-neutral-800 rounded-xl shadow-sm border border-neutral-700 overflow-hidden hover:shadow-lg transition transform hover:-translate-y-1">
+                                <!-- Post Header -->
+                                <div
+                                    class="p-4 border-b border-neutral-700 bg-gradient-to-r from-neutral-800 to-neutral-700">
+                                    <div class="flex items-center gap-3">
+                                        <div
+                                            class="h-10 w-10 rounded-full bg-amber-300 p-0.5 overflow-hidden">
+                                            <img src="https://i.pravatar.cc/150?img={{ $post->id % 70 }}" alt="User"
+                                                class="h-full w-full object-cover rounded-full border border-neutral-800">
+                                        </div>
+                                        <div class="flex-1">
+                                            <h4 class="font-bold text-neutral-100">username</h4>
+                                            <p class="text-xs text-amber-300 font-medium">
+                                                <span class="text-neutral-400">posted</span>   {{ $post->created_at->diffForHumans() }}</p>
+                                        </div>
+                                        <button class="text-neutral-400 hover:text-neutral-200">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                                viewBox="0 0 24 24" stroke="currentColor">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                    d="M5 12h.01M12 12h.01M19 12h.01M6 12a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0zm7 0a1 1 0 11-2 0 1 1 0 012 0z" />
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+
+                                <!-- Post Content -->
+                                <div class="p-4">
+                                    <div class="mb-3">
+                                        <span
+                                            class="inline-block px-2 py-1 text-xs font-semibold bg-blue-900/50 text-blue-400 rounded-full">#Laravel</span>
+                                    </div>
+                                    <h3 class="text-lg font-bold text-neutral-100 mb-2">{{ $post->title }}</h3>
+                                    <p class="text-neutral-300 mb-4">{{ Str::limit($post->body, 120) }}</p>
+                                </div>
+
+                                <!-- Post Actions -->
+                                <div class="p-4 border-t border-neutral-700 flex justify-between text-neutral-400">
+                                    <button class="flex items-center gap-1 hover:text-pink-400 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+                                        </svg>
+                                        <span class="text-sm font-medium">42</span>
+                                    </button>
+                                    <button class="flex items-center gap-1 hover:text-emerald-400 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z" />
+                                        </svg>
+                                        <span class="text-sm font-medium">8</span>
+                                    </button>
+                                    <button class="flex items-center gap-1 hover:text-blue-400 transition">
+                                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+                                            viewBox="0 0 24 24" stroke="currentColor">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                                d="M8.684 13.342C8.886 12.938 9 12.482 9 12c0-.482-.114-.938-.316-1.342m0 2.684a3 3 0 110-2.684m0 2.684l6.632 3.316m-6.632-6l6.632-3.316m0 0a3 3 0 105.367-2.684 3 3 0 00-5.367 2.684zm0 9.316a3 3 0 105.368 2.684 3 3 0 00-5.368-2.684z" />
+                                        </svg>
+                                        <span class="text-sm font-medium">Share</span>
+                                    </button>
+                                </div>
+                            </div>
+                        @empty
+                            <div
+                                class="md:col-span-2 bg-neutral-800 rounded-xl shadow-sm border border-neutral-700 p-8 text-center">
+                                <div
+                                    class="mx-auto w-24 h-24 bg-blue-900/50 rounded-full flex items-center justify-center mb-4">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-12 w-12 text-blue-400"
+                                        fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+                                    </svg>
+                                </div>
+                                <h3 class="text-xl font-bold text-neutral-100 mb-2">No posts yet</h3>
+                                <p class="text-neutral-400 mb-4">Be the first to share your thoughts with the community!
+                                </p>
+                                <a href="{{ route('posts.create') }}"
+                                    class="inline-flex items-center px-4 py-2 bg-gradient-to-r from-blue-600 to-indigo-700 hover:from-blue-700 hover:to-indigo-800 text-neutral-100 rounded-lg shadow-md font-medium transition">
+                                    Create your first post
+                                </a>
+                            </div>
+                        @endforelse
+                    </div>
+                </div>
+
+                <!-- Right Sidebar -->
+                <div class="lg:col-span-3 space-y-6">
+                    <!-- Who to Follow -->
+                    <div class="bg-neutral-800 rounded-xl shadow-sm border border-neutral-700 p-5 sticky top-32">
+                        <h3 class="font-bold text-lg text-neutral-100 mb-4 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-pink-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                            </svg>
+                            Who to follow
+                        </h3>
+                        <div class="space-y-4">
+                            <div
+                                class="flex items-center justify-between p-2 hover:bg-neutral-700/50 rounded-xl transition">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="h-12 w-12 rounded-full bg-amber-300 p-0.5 overflow-hidden">
+                                        <img src="https://i.pravatar.cc/150?img=11"
+                                            class="h-full w-full object-cover rounded-full border-2 border-neutral-800">
+                                    </div>
+                                    <div>
+                                        <h4 class="font-bold text-neutral-100">Alice Cooper</h4>
+                                        <p class="text-xs text-amber-300 font-medium">Laravel Core Team</p>
+                                    </div>
                                 </div>
                                 <button
-                                    class="ml-4 bg-white border border-gray-300 text-gray-700 px-3 py-1 rounded-full text-sm font-medium hover:bg-gray-50 transition duration-150">
+                                    class="text-sm px-3 py-1 bg-neutral-800 border border-neutral-700 text-neutral-100 hover:bg-neutral-700 rounded-full shadow-sm transition">
                                     Follow
                                 </button>
                             </div>
                             <!-- More follow suggestions... -->
                         </div>
+                        <a href="#"
+                            class="block mt-4 text-center text-sm font-medium text-blue-400 hover:text-blue-300">Show
+                            more</a>
                     </div>
 
-                    <!-- Trending Topics -->
-                    <div class="bg-white p-6 rounded-xl shadow-sm border border-gray-100">
-                        <h2 class="text-xl font-semibold text-gray-800 mb-4">Trending Topics</h2>
+                    <!-- Popular Communities -->
+                    <div class="bg-neutral-800 rounded-xl shadow-sm border border-neutral-700 p-5 sticky top-[22rem]">
+                        <h3 class="font-bold text-lg text-neutral-100 mb-4 flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 text-amber-400" fill="none"
+                                viewBox="0 0 24 24" stroke="currentColor">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                            </svg>
+                            Popular Communities
+                        </h3>
                         <div class="space-y-3">
-                            <a href="#" class="block hover:bg-gray-50 p-2 rounded-lg transition duration-150">
-                                <p class="text-sm font-medium text-gray-900">#Productivity</p>
-                                <p class="text-xs text-gray-500">1,245 posts today</p>
+                            <a href="#"
+                                class="flex items-center justify-between p-3 hover:bg-neutral-700/50 rounded-xl transition">
+                                <div class="flex items-center gap-3">
+                                    <div
+                                        class="h-10 w-10 rounded-full bg-red-500 flex items-center justify-center text-white font-bold">
+                                        L
+                                    </div>
+                                    <span class="font-bold text-neutral-100">Laravel</span>
+                                </div>
+                                <span class="text-xs bg-amber-900/50 text-amber-400 px-2 py-1 rounded-full">12.5K
+                                    members</span>
                             </a>
-                            <!-- More trending topics... -->
+                            <!-- More communities... -->
                         </div>
                     </div>
                 </div>
