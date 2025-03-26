@@ -12,9 +12,4 @@ class DashboardController extends Controller
         $posts = Auth::user()->posts()->paginate(2);
         return view('users.dashboard',['posts' => $posts]);
     }
-
-     public function myPosts(){
-       return view('posts.mine');
-    }
-
 }
