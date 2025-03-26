@@ -10,8 +10,19 @@ class Post extends Model
     /** @use HasFactory<\Database\Factories\PostFactory> */
     use HasFactory;
 
-    protected $fillable =[
-      'title',
-      'body',
+    protected $fillable = [
+        'title',
+        'body',
+        'hashtag'
     ];
+
+    public function community()
+    {
+        return $this->belongsTo(Community::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
 }

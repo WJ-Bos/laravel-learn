@@ -22,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'about'
     ];
 
     /**
@@ -47,8 +48,15 @@ class User extends Authenticatable
         ];
     }
 
-    public function posts() : HasMany
+    public function posts(): HasMany
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function communities()
+    {
+        return $this->belongsToMany(Community::class)
+            ->using(CommunityMember::class)
+            ->withPivot('role');
     }
 }
