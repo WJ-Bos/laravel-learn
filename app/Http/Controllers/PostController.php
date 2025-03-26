@@ -13,7 +13,7 @@ class PostController extends Controller
      */
     public function index()
     {
-        $posts = Post::latest()->get();
+        $posts = Post::with('user')->latest()->get();
         return view('posts.index',['posts' => $posts]);
     }
 
@@ -32,8 +32,16 @@ class PostController extends Controller
     {
        $fields = $request->validate([
         'title' => ['required','string'],
-        'body' => ['required','max:255']
-       ]);
+        'body' => ['required','max:255'],
+            'hashtag' => [
+                'nullable',
+                'string',
+                'max:20',
+                'regex:/^[^#].*/'
+            ]
+       ], [
+            'hashtag.regex' => 'The hashtag must not start with a # symbol.'
+        ]);
 
        Auth::user()->posts()->create($fields);
        return redirect('/');
