@@ -18,7 +18,7 @@
         <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
             <div class="bg-neutral-800 rounded-xl shadow-md overflow-hidden">
                 <div class="p-6 sm:p-8">
-                    <form method="POST" action="{{ route() }}" enctype="multipart/form-data">
+                    <form method="POST"  enctype="multipart/form-data">
                         @csrf
                         @method('PUT')
 
@@ -28,7 +28,7 @@
                                 <div class="flex-shrink-0">
                                     <img id="profile-preview"
                                         class="h-32 w-32 rounded-full object-cover border-2 border-neutral-700"
-                                        src="{{ auth()->user()->profile_picture ?? 'https://picsum.photos/200' }}"
+                                        src="{{ $user->profile_picture ?? 'https://picsum.photos/200' }}"
                                         alt="Current profile picture">
                                     <input type="file" id="profile_picture" name="profile_picture" class="hidden"
                                         accept="image/*">
@@ -40,7 +40,7 @@
                                     <label for="name" class="block text-sm font-medium text-neutral-300 mb-1">First
                                         Name</label>
                                     <input type="text" id="name" name="name"
-                                        value="{{ old('name', auth()->user()->name) }}"
+                                        value="{{ old('name', $user->name) }}"
                                         class="w-full bg-neutral-700 border border-neutral-600 rounded-md px-4 py-2 text-white focus:ring-2 focus:ring-amber-300 focus:border-transparent transition duration-200">
                                     @error('name')
                                         <p class="mt-1 text-sm text-red-500">{{ $message }}</p>
