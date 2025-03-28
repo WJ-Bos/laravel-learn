@@ -258,13 +258,13 @@
         <div class="min-h-screen ">
             <!-- Hero Section -->
             <div class="container mx-auto px-4 py-20 text-center">
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-800 mb-6">Join Our Growing Community</h1>
-                <p class="text-xl text-gray-600 max-w-2xl mx-auto mb-10">
+                <h1 class="text-4xl md:text-5xl font-bold text-white mb-6">Join Our Growing Community</h1>
+                <p class="text-xl text-white max-w-2xl mx-auto mb-10">
                     Connect with like-minded people and share your thoughts in a positive environment.
                 </p>
                 <div class="flex flex-col sm:flex-row justify-center gap-4">
                     <a href="{{ route('register') }}"
-                        class="bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-200 shadow-md">
+                        class="bg-amber-300 text-black px-8 py-3 rounded-full text-lg font-medium transition duration-200 shadow-md">
                         Get Started
                     </a>
                     <a href="{{ route('login') }}"
@@ -276,7 +276,7 @@
 
             <!-- Features Section -->
             <div class="container mx-auto px-4 py-16">
-                <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">Why Join Our Community?</h2>
+                <h2 class="text-3xl font-bold text-center text-white mb-12">Why Join Our Community?</h2>
                 <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div class="bg-white p-8 rounded-xl shadow-sm border border-gray-100 text-center">
                         <div class="bg-blue-100 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-6">
@@ -319,7 +319,7 @@
             <!-- Preview Section -->
             <div class=" py-16">
                 <div class="container mx-auto px-4">
-                    <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">See What People Are Sharing</h2>
+                    <h2 class="text-3xl font-bold text-center text-white mb-12">See What People Are Sharing</h2>
 
                     <div class="max-w-2xl mx-auto space-y-6">
                         <!-- Sample Post 1 -->
@@ -351,7 +351,7 @@
 
                     <div class="text-center mt-12">
                         <a href="{{ route('register') }}"
-                            class="inline-block bg-blue-600 hover:bg-blue-700 text-white px-8 py-3 rounded-full text-lg font-medium transition duration-200 shadow-md">
+                            class="inline-block bg-amber-300 text-black px-8 py-3 rounded-full text-lg font-medium transition duration-200 shadow-md">
                             Join Now to See More
                         </a>
                     </div>
@@ -359,10 +359,10 @@
             </div>
 
             <!-- Footer CTA -->
-            <div class="bg-blue-600 py-16 rounded-4xl">
+            <div class="bg-amber-300/30 py-16 rounded-4xl text-white">
                 <div class="container mx-auto px-4 text-center">
-                    <h2 class="text-3xl font-bold text-white mb-6">Ready to Join the Conversation?</h2>
-                    <p class="text-xl text-blue-100 max-w-2xl mx-auto mb-10">
+                    <h2 class="text-3xl font-bold  mb-6">Ready to Join the Conversation?</h2>
+                    <p class="text-xl  max-w-2xl mx-auto mb-10">
                         Sign up now and start connecting with our community in seconds.
                     </p>
                     <a href="{{ route('register') }}"
